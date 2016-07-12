@@ -31,11 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true  //
     }   ///////////////
     
-    /*
-     
-     * Write your playBlackjack method in here
-     
-     */
+    func playBlackjack() {
+        
+    }
     
 }
 
