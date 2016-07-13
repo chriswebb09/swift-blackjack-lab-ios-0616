@@ -13,6 +13,7 @@ class Deck {
     private var dealtCards: [Card]
     var cardLabel: String
     var description: String
+    
     init() {
         self.dealtCards = [Card]()
         self.remainingCards = Deck.generateDeck()
