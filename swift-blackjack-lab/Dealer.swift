@@ -11,6 +11,41 @@ import Foundation
 class Dealer {
     var deck: Deck
     var house: House
+    var player: Player
+    
+    
+    init() {
+        self.deck = Deck()
+        self.house = House()
+        self.player = Player()
+    }
+    
+    func placeBet(bet: UInt) {
+        
+    }
+    
+    func turn(player: Player) {
+        
+    }
+    
+    func winner() -> String{
+        return "House"
+        
+    }
+    
+    func deal() -> Card {
+        return self.deck.drawCard()
+    }
+    
+    func bet() {
+        
+    }
+    
+    func award() {
+        
+    }
+    
+    
     
     
 }

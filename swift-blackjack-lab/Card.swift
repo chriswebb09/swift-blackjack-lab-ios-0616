@@ -13,12 +13,14 @@ class Card {
     var rank: String
     var cardLabel: String
     var cardValue: UInt?
+    var description: String
     
     init(suit: String, rank: String) {
         self.suit = suit
         self.rank = rank
-        self.cardLabel = "/(suit)/(rank)"
+        self.cardLabel = "\(suit)\(rank)"
         self.cardValue = UInt(rank)
+        self.description = "Card: \(cardLabel) Value: \(cardValue)"
     }
     
     convenience init () {

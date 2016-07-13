@@ -11,7 +11,7 @@ import Foundation
 class Player {
     var name: String
     var cards: [Card]
-    var handScore: UInt
+    var handscore: UInt
     var blackjack: Bool
     var busted: Bool
     var stayed: Bool
@@ -19,10 +19,10 @@ class Player {
     var tokens: UInt
     var description: String
     
-    init(name: String, cards: [Card]) {
+    init(name: String) {
         self.name = name
-        self.cards = cards
-        self.handScore = 0
+        self.cards = [Card()]
+        self.handscore = 0
         self.blackjack = false
         self.busted = false
         self.stayed = false
@@ -31,7 +31,22 @@ class Player {
         self.description = "Game"
     }
     
-    convenience init(name: String) {
-        self.init(name: "Player", cards: [Card()])
+    convenience init() {
+        self.init(name: "Player")
+        
     }
+    
+    func canPlaceBet(bet: UInt) -> Bool {
+        return false
+    }
+    
+    func didWin(bet: UInt) -> Bool {
+        return false
+    }
+    
+    func didLose(bet: UInt) -> Bool {
+        return false
+    }
+    
+    
 }

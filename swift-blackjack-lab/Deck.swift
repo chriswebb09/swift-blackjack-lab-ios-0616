@@ -7,36 +7,38 @@
 //
 
 import Foundation
-
 class Deck {
     
-//    var remainingCards: [String] {
-//        return generateCards()
-//    }
-    var remainingCards: [String]
-    var dealtCards: [String]
-    
+    private var remainingCards: [Card]
+    private var dealtCards: [Card]
+    var cardLabel: String
+    var description: String
     init() {
-        self.dealtCards = [String]()
-        self.remainingCards = generateCards()
+        self.dealtCards = [Card]()
+        self.remainingCards = Deck.generateDeck()
+        cardLabel = Card().cardLabel
+        description = Card().description
     }
     
-    func generateCards() -> [String] {
-        let getSuit: [String] = Card().validSuits()
-        let getRanks: [String] = Card().validRanks()
-        var newDeck: [String] = []
-        for cardRank in getRanks {
-            for cardSuit in getSuit {
-                newDeck.append("/(cardSuit)/(cardRank)")
-            }
-        }
-        return newDeck
-    }
-    
-    func drawCard() -> String {
-        let returnCard: String = self.remainingCards.popLast()!
+    func drawCard() -> Card {
+        let returnCard: Card = self.remainingCards.popLast()!
         dealtCards.append(returnCard)
         return returnCard
+    }
+    
+    
+    func shuffle() {
+        
+    }
+    
+    private class func generateDeck() -> [Card] {
+        var cardDeck: [Card] = []
+        for suit in Card().validSuits() {
+            for rank in Card().validRanks() {
+                cardDeck.append(Card(suit: suit, rank: rank))
+            }
+        }
+        return cardDeck
     }
     
 }

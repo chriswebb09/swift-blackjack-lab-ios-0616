@@ -10,13 +10,16 @@ import Foundation
 
 
 class House: Player {
-    var wallet: UInt
-    var mustHit: Bool
+//    var wallet: UInt
+//    var mustHit: Bool
     
-    init() {
-        super.init(name: "House")
-        self.wallet = 100
-        self.mustHit = true
+    override init(name: String) {
+        super.init(name: name)
+//        self.wallet = 100
+//        self.mustHit = true
+    }
+    
+    func mustHit() {
     }
     
 }
