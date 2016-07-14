@@ -62,6 +62,8 @@ class ViewController: UIViewController {
     }
     
     func dealNewRound() {
+        self.game.player.handscore = 0
+        self.game.house.handscore = 0
         houseCard1.hidden = true
         houseCard2.hidden = true
         houseCard3.hidden = true
@@ -89,9 +91,15 @@ class ViewController: UIViewController {
     
     private class func updateViews() {
         
+        
     }
     
     func showPlayerCards() {
+        var i = 0
+        while i < self.game.player.cards.count {
+            self.playerCardViews[i].text = self.game.player.cards[i].cardLabel
+            i += 1
+        }
         
     }
 
@@ -106,6 +114,7 @@ class ViewController: UIViewController {
         self.stay.enabled = false
     }
     @IBAction func hitTapped(sender: AnyObject) {
+        self.game.player.acceptCard(self.game.dealer.dealCard())
     }
     
     

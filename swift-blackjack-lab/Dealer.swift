@@ -10,7 +10,7 @@ import Foundation
 
 class Dealer {
     var deck: Deck
-    var house: House
+    var house: Player
     var player: Player
     
     
@@ -33,17 +33,28 @@ class Dealer {
 //        
 //    }
     
-    func dealRound() {
-        while player.cards.count < 2 {
-            let newCard = self.deck.drawCard()
-            player.acceptCard(newCard)
-        }
+//    func dealRound() {
+//        while player.cards.count < 2 {
+//            let newCard = self.deck.drawCard()
+//            player.acceptCard(newCard)
+//        }
+//    }
+    
+    
+    func dealCard() -> Card {
+        let newCard = self.deck.drawCard()
+        return newCard
     }
     
-    func dealCardToPlayer() {
-        let newCard = self.deck.drawCard()
-        self.player.acceptCard(newCard)
-    }
+//    func dealCardToPlayer() {
+//        let newCard = self.deck.drawCard()
+//        self.player.acceptCard(newCard)
+//    }
+//    
+//    func dealCardToHouse() {
+//        let newCard = self.deck.drawCard()
+//        self.house.acceptCard(newCard)
+//    }
     
 //    func bet() {
 //        

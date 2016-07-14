@@ -11,37 +11,62 @@ import Foundation
 
 class BlackjackGame {
     
-    var score: Int
-    var wins: Int
     var player: Player
-    var house: House
+//    var house: House
     var dealer: Dealer
+    var house: Player
     
     
     init() {
-        self.score = 0
-        self.wins = 0
-        
+        self.dealer = Dealer()
+        self.player = Player()
+        self.house = Player()
     }
     
-    func playBlackjack() {
-        
-    }
     
     func dealNewRound() {
-        self.dealer.dealRound()
+        var i = 0
+        while i < 2 {
+            self.player.acceptCard(dealer.dealCard())
+            self.house.acceptCard(dealer.dealCard())
+            i += 1
+        }
     }
     
-    func dealCardToPlayer() {
-        
+    func hit() {
+        let dealtCard = dealer.dealCard()
+        self.player.acceptCard(dealtCard)
+        self.player.handscore += dealtCard.cardValue!
     }
     
-    func dealCardToHouse() {
-        
-        
-    }
+//    func dealCard() -> Card {
+//        let newCard = self.dealer.dealCard()
+//        return newCard
+//    }
     
-    func houseWins() -> Bool {
-        return false 
-    }
+    
+    
+//    func dealNewRound() {
+//        var i = 0
+//        while i < 2 {
+//            self.dealer.dealCardToPlayer()
+//            self.dealer.dealCardToHouse()
+//            i += 1
+//        }
+//       
+//        
+//        self.dealer.dealRound(//)
+    
+//    func dealCardToPlayer() {
+//        
+//    }
+//    
+//    func dealCardToHouse() {
+//        
+//        
+//    }
+    
+//    func houseWins() -> Bool {
+//        return false 
+//    }
 }
