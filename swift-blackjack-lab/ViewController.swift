@@ -45,19 +45,15 @@ class ViewController: UIViewController {
     
     var houseCardViews: [UILabel]!
     var playerCardViews: [UILabel]!
-    
-//    required init?(coder aDecoder: NSCoder) {
-//        self.houseCardViews = []
-//        self.playerCardViews = []
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
+    var game: BlackjackGame!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.houseCardViews = [houseCard1,houseCard2, houseCard3,  houseCard4, houseCard5]
+        self.game = BlackjackGame()
+        self.houseCardViews = [houseCard1,houseCard2, houseCard3,  houseCard4, houseCard5]
         self.playerCardViews = [playerCard1, playerCard2, playerCard3, playerCard4, playerCard5]
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        dealNewRound()
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,11 +67,15 @@ class ViewController: UIViewController {
         houseCard3.hidden = true
         houseCard4.hidden = true
         houseCard5.hidden = true
+        houseBusted.hidden = true
+        houseBlackjack.hidden = true
+        houseStayed.hidden = true
         playerCard1.hidden = true
         playerCard2.hidden = true
         playerCard3.hidden = true
         playerCard4.hidden = true
         playerCard5.hidden = true
+        winner.hidden = true
         self.deal.enabled = false
         self.hit.enabled = true
         self.stay.enabled = true
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
     @IBAction func stayButtonTapped(sender: AnyObject) {
         self.deal.enabled = true
         self.hit.enabled = false
-        self.stay.enabled = false 
+        self.stay.enabled = false
     }
     @IBAction func hitTapped(sender: AnyObject) {
     }

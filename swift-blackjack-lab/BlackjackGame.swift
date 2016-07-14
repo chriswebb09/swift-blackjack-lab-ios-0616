@@ -13,6 +13,9 @@ class BlackjackGame {
     
     var score: Int
     var wins: Int
+    var player: Player
+    var house: House
+    var dealer: Dealer
     
     
     init() {
@@ -26,7 +29,7 @@ class BlackjackGame {
     }
     
     func dealNewRound() {
-        
+        self.dealer.dealRound()
     }
     
     func dealCardToPlayer() {
@@ -34,6 +37,7 @@ class BlackjackGame {
     }
     
     func dealCardToHouse() {
+        
         
     }
     

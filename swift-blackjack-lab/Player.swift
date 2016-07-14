@@ -51,21 +51,21 @@ class Player {
         blackjack = false
     }
     
-    func canPlaceBet(bet: UInt) -> Bool {
-        if (tokens >= bet) {
-            return true
-        }
-        return false
-    }
-    
-    func didWin(bet: UInt) -> Bool {
-        return false
-    }
-    
-    func didLose(bet: UInt) -> Bool {
-        return false
-    }
-    
+//    func canPlaceBet(bet: UInt) -> Bool {
+//        if (tokens >= bet) {
+//            return true
+//        }
+//        return false
+//    }
+//    
+//    func didWin(bet: UInt) -> Bool {
+//        return false
+//    }
+//    
+//    func didLose(bet: UInt) -> Bool {
+//        return false
+//    }
+//    
     func acceptCard(card: Card) {
         cards.append(card)
         

@@ -20,27 +20,35 @@ class Dealer {
         self.player = Player()
     }
     
-    func placeBet(bet: UInt) {
-        
+//    func placeBet(bet: UInt) {
+//        
+//    }
+    
+//    func turn(player: Player) {
+//        
+//    }
+//    
+//    func winner() -> String{
+//        return "House"
+//        
+//    }
+    
+    func dealRound() {
+        while player.cards.count < 2 {
+            let newCard = self.deck.drawCard()
+            player.acceptCard(newCard)
+        }
     }
     
-    func turn(player: Player) {
-        
+    func dealCardToPlayer() {
+        let newCard = self.deck.drawCard()
+        self.player.acceptCard(newCard)
     }
     
-    func winner() -> String{
-        return "House"
-        
-    }
-    
-    func deal() -> Card {
-        return self.deck.drawCard()
-    }
-    
-    func bet() {
-        
-    }
-    
+//    func bet() {
+//        
+//    }
+//    
     func award() {
         
     }
