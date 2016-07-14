@@ -39,7 +39,7 @@ class Deck {
         }
         
         self.remainingCards.removeAll()
-        self.remainingCards.appendContents(shuffledDeck)
+        //self.remainingCards.appendContents(shuffledDeck)
         
         
     }
