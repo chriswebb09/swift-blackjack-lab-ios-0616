@@ -51,6 +51,18 @@ class Player {
         blackjack = false
     }
     
+    func checkStatus() {
+        if self.handscore > 21 {
+            self.busted = true
+            self.blackjack = false
+        } else if self.handscore < 21 {
+            self.busted = false
+            self.blackjack = false 
+        } else if self.handscore == 21 {
+            self.blackjack = true
+        }
+    }
+    
 //    func canPlaceBet(bet: UInt) -> Bool {
 //        if (tokens >= bet) {
 //            return true

@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerCard3: UILabel!
     @IBOutlet weak var playerCard4: UILabel!
     @IBOutlet weak var playerCard5: UILabel!
+    @IBOutlet weak var playerStayed: UILabel!
     
     
     @IBOutlet weak var house: UILabel!
@@ -53,7 +54,7 @@ class ViewController: UIViewController {
         self.houseCardViews = [houseCard1,houseCard2, houseCard3,  houseCard4, houseCard5]
         self.playerCardViews = [playerCard1, playerCard2, playerCard3, playerCard4, playerCard5]
         
-        dealNewRound()
+        dealRound()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +62,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func dealNewRound() {
+    func dealRound() {
         self.game.player.handscore = 0
         self.game.house.handscore = 0
         houseCard1.hidden = true
@@ -71,6 +72,7 @@ class ViewController: UIViewController {
         houseCard5.hidden = true
         houseBusted.hidden = true
         houseBlackjack.hidden = true
+        playerStayed.hidden = true
         houseStayed.hidden = true
         playerCard1.hidden = true
         playerCard2.hidden = true
@@ -78,9 +80,11 @@ class ViewController: UIViewController {
         playerCard4.hidden = true
         playerCard5.hidden = true
         winner.hidden = true
-        self.deal.enabled = false
+        self.deal.enabled = true
         self.hit.enabled = true
         self.stay.enabled = true
+        self.updateViews()
+        self.updateScore()
     }
     
     
@@ -89,14 +93,16 @@ class ViewController: UIViewController {
         
     }
     
-    private class func updateViews() {
-        
-        
+    func updateViews() {
+        self.getActiveLabels()
+        self.showPlayerCards()
+        self.updateScore()
     }
     
     func showPlayerCards() {
         var i = 0
         while i < self.game.player.cards.count {
+            self.playerCardViews[i].hidden = false
             self.playerCardViews[i].text = self.game.player.cards[i].cardLabel
             i += 1
         }
@@ -105,16 +111,57 @@ class ViewController: UIViewController {
 
     
     func showHouseCards() {
+        var i = 0
+        while i < self.game.house.cards.count {
+            self.houseCardViews[i].hidden = false
+            self.houseCardViews[i].text = self.game.house.cards[i].cardLabel
+            i += 1
+        }
         
+    }
+    
+    func updateScore() {
+        self.houseScore.text = String(self.game.house.handscore)
+        self.playerScore.text = String(self.game.player.handscore)
+    }
+    
+    func getActiveLabels() {
+        self.game.player.checkStatus()
+        self.game.house.checkStatus()
+        if !self.game.player.busted {
+            self.playerBusted.hidden = true
+        } else if !self.game.house.busted {
+            self.houseBusted.hidden = true
+        } else if !self.game.player.blackjack {
+            self.playerBlackjack.hidden = true
+        } else if !self.game.house.blackjack {
+            self.houseBlackjack.hidden = true
+        }
+        
+        
+//        if self.game.player.busted {
+//            self.playerBusted.hidden = false
+//        } else if self.game.player.blackjack {
+//            self.playerBlackjack.hidden = false
+//        } else if self.game.house.busted {
+//            self.houseBusted.hidden = false
+//        } else if self.game.house.blackjack {
+//            self.houseBlackjack.hidden = false
+//        }
     }
 
     @IBAction func stayButtonTapped(sender: AnyObject) {
         self.deal.enabled = true
         self.hit.enabled = false
         self.stay.enabled = false
+        self.playerStayed.hidden = false
+        self.showHouseCards()
     }
     @IBAction func hitTapped(sender: AnyObject) {
-        self.game.player.acceptCard(self.game.dealer.dealCard())
+        //self.game.player.acceptCard(self.game.dealer.dealCard())
+        self.game.hit()
+//        self.updateScore()
+        self.updateViews()
     }
     
     
@@ -122,6 +169,8 @@ class ViewController: UIViewController {
         self.deal.enabled = false
         self.hit.enabled = true
         self.stay.enabled = true
+        self.game.dealNewRound()
+        self.updateViews()
         
     }
 }

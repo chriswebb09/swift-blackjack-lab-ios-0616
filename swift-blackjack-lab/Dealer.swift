@@ -10,14 +10,10 @@ import Foundation
 
 class Dealer {
     var deck: Deck
-    var house: Player
-    var player: Player
     
     
     init() {
         self.deck = Deck()
-        self.house = House()
-        self.player = Player()
     }
     
 //    func placeBet(bet: UInt) {
