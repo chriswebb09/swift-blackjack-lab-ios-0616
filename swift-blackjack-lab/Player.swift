@@ -80,7 +80,10 @@ class Player {
 //    
     func acceptCard(card: Card) {
         cards.append(card)
-        
+    }
+    
+    func newHand() {
+        cards.removeAll()
     }
     
     func shouldHit() -> Bool {

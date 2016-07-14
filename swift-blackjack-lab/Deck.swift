@@ -28,21 +28,21 @@ class Deck {
     }
     
     
-    func shuffle() {
-        
-        var shuffledDeck = []
-        
-        while self.remainingCards.count > 0 {
-            var index = arc4random_uniform(UInt32(self.remainingCards.count))
-            var newCard = self.remainingCards.removeAtIndex(Int(index))
-            shuffledDeck.arrayByAddingObject(newCard)
-        }
-        
-        self.remainingCards.removeAll()
-        //self.remainingCards.appendContents(shuffledDeck)
-        
-        
-    }
+//    func shuffle() {
+//        
+//        var shuffledDeck = []
+//        
+//        while self.remainingCards.count > 0 {
+//            var index = arc4random_uniform(UInt32(self.remainingCards.count))
+//            var newCard = self.remainingCards.removeAtIndex(Int(index))
+//            shuffledDeck.arrayByAddingObject(newCard)
+//        }
+//        
+//        self.remainingCards.removeAll()
+//        //self.remainingCards.appendContents(shuffledDeck)
+//        
+//        
+//    }
     
     private class func generateDeck() -> [Card] {
         var cardDeck: [Card] = []
@@ -57,5 +57,6 @@ class Deck {
     
     func gatherDealtCards() {
         self.remainingCards.appendContentsOf(self.dealtCards)
+        self.dealtCards.removeAll()
     }
 }

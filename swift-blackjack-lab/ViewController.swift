@@ -53,7 +53,12 @@ class ViewController: UIViewController {
         self.game = BlackjackGame()
         self.houseCardViews = [houseCard1,houseCard2, houseCard3,  houseCard4, houseCard5]
         self.playerCardViews = [playerCard1, playerCard2, playerCard3, playerCard4, playerCard5]
-        
+        houseBusted.hidden = true
+        houseBlackjack.hidden = true
+        playerStayed.hidden = true
+        playerBusted.hidden = true
+        playerBlackjack.hidden = true
+        //playerStayed.hidden = true
         dealRound()
     }
 
@@ -125,6 +130,13 @@ class ViewController: UIViewController {
         self.playerScore.text = String(self.game.player.handscore)
     }
     
+    func newRound() {
+        self.game.player.cards.removeAll()
+        self.game.house.cards.removeAll()
+        self.game.player.handscore = 0
+        self.game.house.handscore = 0
+    }
+    
     func getActiveLabels() {
         self.game.player.checkStatus()
         self.game.house.checkStatus()
@@ -160,6 +172,12 @@ class ViewController: UIViewController {
     @IBAction func hitTapped(sender: AnyObject) {
         //self.game.player.acceptCard(self.game.dealer.dealCard())
         self.game.hit()
+        if game.player.handscore == 21 {
+            self.playerBlackjack.hidden = false
+        }
+        if game.player.handscore > 21 {
+            self.playerBusted.hidden = false
+        }
 //        self.updateScore()
         self.updateViews()
     }
@@ -169,7 +187,7 @@ class ViewController: UIViewController {
         self.deal.enabled = false
         self.hit.enabled = true
         self.stay.enabled = true
-        self.game.dealNewRound()
+        self.newRound()
         self.updateViews()
         
     }

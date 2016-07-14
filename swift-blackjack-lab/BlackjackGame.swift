@@ -43,6 +43,9 @@ class BlackjackGame {
             }
             i += 1
         }
+//        self.player.cards.removeAll()
+//        self.house.cards.removeAll()
+        self.reset()
         self.player.checkStatus()
         self.house.checkStatus()
     }
@@ -59,6 +62,23 @@ class BlackjackGame {
 //            self.player.blackjack = true 
 //        }
     }
+    
+    
+    func stayed() -> Bool {
+        self.house.cards.removeAll()
+        self.player.cards.removeAll()
+        return true 
+    }
+    
+    
+    func reset() {
+        self.dealer.deck.gatherDealtCards()
+        self.player.handscore = 0
+        self.house.handscore = 0
+        
+    }
+
+
     
     
     

@@ -37,6 +37,7 @@ class Dealer {
 //    }
     
     
+    
     func dealCard() -> Card {
         let newCard = self.deck.drawCard()
         return newCard
