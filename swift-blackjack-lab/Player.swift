@@ -11,6 +11,9 @@ import Foundation
 class Player {
     var name: String
     var cards: [Card]
+    var aceInHand: Bool
+    var wins: UInt
+    var losses: UInt
     var handscore: UInt
     var blackjack: Bool
     var busted: Bool
@@ -21,14 +24,17 @@ class Player {
     
     init(name: String) {
         self.name = name
-        self.cards = [Card()]
+        self.cards = []
+        self.aceInHand = false
+        self.wins = 0
+        self.losses = 0
         self.handscore = 0
         self.blackjack = false
         self.busted = false
         self.stayed = false
         self.mayHit = true
         self.tokens = 100
-        self.description = "Game"
+        self.description = "Player"
     }
     
     convenience init() {
@@ -36,7 +42,19 @@ class Player {
         
     }
     
+    func resetForNewGame() {
+        cards.removeAll()
+        handscore = 0
+        aceInHand = false
+        stayed = false
+        busted = false
+        blackjack = false
+    }
+    
     func canPlaceBet(bet: UInt) -> Bool {
+        if (tokens >= bet) {
+            return true
+        }
         return false
     }
     
@@ -46,6 +64,19 @@ class Player {
     
     func didLose(bet: UInt) -> Bool {
         return false
+    }
+    
+    func acceptCard(card: Card) {
+        cards.append(card)
+        
+    }
+    
+    func shouldHit() -> Bool {
+        if handscore < 16 {
+            stayed = true
+            return false 
+        }
+        return true 
     }
     
     

@@ -15,10 +15,10 @@ class Deck {
     var description: String
     
     init() {
-        self.dealtCards = [Card]()
+        self.dealtCards = []
         self.remainingCards = Deck.generateDeck()
-        cardLabel = Card().cardLabel
-        description = Card().description
+        self.cardLabel = Card().cardLabel
+        self.description = Card().description
     }
     
     func drawCard() -> Card {
@@ -29,6 +29,18 @@ class Deck {
     
     
     func shuffle() {
+        
+        var shuffledDeck = []
+        
+        while self.remainingCards.count > 0 {
+            var index = arc4random_uniform(UInt32(self.remainingCards.count))
+            var newCard = self.remainingCards.removeAtIndex(Int(index))
+            shuffledDeck.arrayByAddingObject(newCard)
+        }
+        
+        self.remainingCards.removeAll()
+        self.remainingCards.appendContents(shuffledDeck)
+        
         
     }
     
@@ -42,4 +54,8 @@ class Deck {
         return cardDeck
     }
     
+    
+    func gatherDealtCards() {
+        self.remainingCards.appendContentsOf(self.dealtCards)
+    }
 }
