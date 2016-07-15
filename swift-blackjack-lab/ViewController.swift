@@ -126,17 +126,17 @@ class ViewController: UIViewController {
     }
     
     func updateScore() {
-        self.houseScore.text = String(self.game.house.handscore)
-        self.playerScore.text = String(self.game.player.handscore)
+        self.houseScore.text = "Score: \(String(self.game.house.handscore))"
+        self.playerScore.text = "Score: \(String(self.game.player.handscore))"
     }
     
-    func newRound() {
-        self.game.player.cards.removeAll()
-        self.game.house.cards.removeAll()
-        self.game.player.handscore = 0
-        self.game.house.handscore = 0
-    }
-    
+//    func newRound() {
+//        self.game.player.cards.removeAll()
+//        self.game.house.cards.removeAll()
+//        self.game.player.handscore = 0
+//        self.game.house.handscore = 0
+//    }
+//    
     func getActiveLabels() {
         self.game.player.checkStatus()
         self.game.house.checkStatus()
@@ -163,10 +163,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func stayButtonTapped(sender: AnyObject) {
+        self.houseScore.hidden = false
         self.deal.enabled = true
         self.hit.enabled = false
         self.stay.enabled = false
         self.playerStayed.hidden = false
+        self.game.houseTurn()
         self.showHouseCards()
     }
     @IBAction func hitTapped(sender: AnyObject) {
@@ -174,6 +176,8 @@ class ViewController: UIViewController {
         self.game.hit()
         if game.player.handscore == 21 {
             self.playerBlackjack.hidden = false
+            self.playerBusted.hidden = true
+            self.winner.hidden = false
         }
         if game.player.handscore > 21 {
             self.playerBusted.hidden = false
@@ -183,13 +187,31 @@ class ViewController: UIViewController {
     }
     
     
+    
     @IBAction func dealTapped(sender: AnyObject) {
-        self.deal.enabled = false
+        self.newRound()
+        self.dealRound()
+        self.houseScore.text = "Score: 0"
+        self.game.dealNewRound()
+        self.deal.enabled = true
         self.hit.enabled = true
         self.stay.enabled = true
-        self.newRound()
         self.updateViews()
+    }
+    
+//    func houseTurn() {
+//        self.game.houseTurn()
+//    }
+    
+    func newRound() {
         
+        for handCard in self.game.player.cards {
+            handCard.cardLabel = ""
+            handCard.cardValue = 0
+        }
+        //self.updateViews()
+        self.game.reset()
+        self.updateViews()
     }
 }
 

@@ -82,10 +82,14 @@ class Player {
         cards.append(card)
     }
     
-    func newHand() {
-        cards.removeAll()
-    }
+//    func newHand() {
+//        cards.removeAll()
+//    }
     
+//    func resetForNewGame() {
+//        cards.removeAll()
+//    }
+//    
     func shouldHit() -> Bool {
         if handscore < 16 {
             stayed = true

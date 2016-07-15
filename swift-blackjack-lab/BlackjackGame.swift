@@ -30,6 +30,9 @@ class BlackjackGame {
     }
     
     func dealNewRound() {
+        self.player.checkStatus()
+        self.house.checkStatus()
+        self.reset()
         var i = 0
         while i < 2 {
             self.player.acceptCard(dealer.dealCard())
@@ -43,11 +46,6 @@ class BlackjackGame {
             }
             i += 1
         }
-//        self.player.cards.removeAll()
-//        self.house.cards.removeAll()
-        self.reset()
-        self.player.checkStatus()
-        self.house.checkStatus()
     }
     
     func hit() {
@@ -65,19 +63,23 @@ class BlackjackGame {
     
     
     func stayed() -> Bool {
-        self.house.cards.removeAll()
-        self.player.cards.removeAll()
         return true 
     }
     
     
     func reset() {
-        self.dealer.deck.gatherDealtCards()
-        self.player.handscore = 0
-        self.house.handscore = 0
-        
+        self.player.resetForNewGame()
+        self.house.resetForNewGame()
     }
 
+    
+    func houseTurn() {
+        if self.house.shouldHit() {
+            let newHouseCard = dealer.dealCard()
+            self.house.acceptCard(newHouseCard)
+            self.house.handscore += newHouseCard.cardValue!
+        }
+    }
 
     
     
