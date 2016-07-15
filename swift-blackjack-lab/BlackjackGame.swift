@@ -74,10 +74,12 @@ class BlackjackGame {
 
     
     func houseTurn() {
-        if self.house.shouldHit() {
+        while self.house.shouldHit() == true {
             let newHouseCard = dealer.dealCard()
             self.house.acceptCard(newHouseCard)
-            self.house.handscore += newHouseCard.cardValue!
+            if let newScore = newHouseCard.cardValue {
+                self.house.handscore += newScore
+            }
         }
     }
 

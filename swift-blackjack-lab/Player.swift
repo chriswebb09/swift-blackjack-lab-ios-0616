@@ -91,7 +91,7 @@ class Player {
 //    }
 //    
     func shouldHit() -> Bool {
-        if handscore < 16 {
+        if handscore > 16 {
             stayed = true
             return false 
         }
