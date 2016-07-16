@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         self.game = BlackjackGame()
         self.houseCardViews = [houseCard1,houseCard2, houseCard3,  houseCard4, houseCard5]
         self.playerCardViews = [playerCard1, playerCard2, playerCard3, playerCard4, playerCard5]
+        self.newGame()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +82,7 @@ class ViewController: UIViewController {
         self.deal.enabled = true
         self.hit.enabled = true
         self.stay.enabled = true
+        self.playerBlackjack.hidden = true
         
     }
     
@@ -132,6 +134,9 @@ class ViewController: UIViewController {
             self.playerBlackjack.hidden = false
             self.playerBusted.hidden = true
             self.winner.hidden = false
+            self.deal.enabled = true
+            self.hit.enabled = false
+            self.stay.enabled = false
         }
         if game.player.handscore > 21 {
             self.playerBusted.hidden = false
@@ -155,6 +160,7 @@ class ViewController: UIViewController {
     
     func houseTurn() {
         self.game.houseTurn()
+        self.game.house.resetForNewGame()
     }
     
     func getActiveLabels() {
@@ -168,6 +174,15 @@ class ViewController: UIViewController {
             self.playerBlackjack.hidden = true
         } else if !self.game.house.blackjack {
             self.houseBlackjack.hidden = true
+        }
+    }
+    
+    func startNewRound() {
+        self.newGame()
+        self.houseScore.hidden = true
+        self.game.dealNewRound()
+        self.updateViews()
+            
         }
 
 
@@ -346,5 +361,5 @@ class ViewController: UIViewController {
 //        self.updateViews()
 //    }
 //}
-}
+
 

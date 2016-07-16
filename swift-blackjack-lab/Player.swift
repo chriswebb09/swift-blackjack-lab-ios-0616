@@ -62,34 +62,11 @@ class Player {
             self.blackjack = true
         }
     }
-    
-//    func canPlaceBet(bet: UInt) -> Bool {
-//        if (tokens >= bet) {
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    func didWin(bet: UInt) -> Bool {
-//        return false
-//    }
-//    
-//    func didLose(bet: UInt) -> Bool {
-//        return false
-//    }
-//    
+
     func acceptCard(card: Card) {
         cards.append(card)
     }
     
-//    func newHand() {
-//        cards.removeAll()
-//    }
-    
-//    func resetForNewGame() {
-//        cards.removeAll()
-//    }
-//    
     func shouldHit() -> Bool {
         if handscore > 16 {
             stayed = true

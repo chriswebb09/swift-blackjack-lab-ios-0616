@@ -12,12 +12,10 @@ import Foundation
 class BlackjackGame {
     
     var player: Player
-//    var house: House
     var dealer: Dealer
     var house: Player
-//    var busted: Bool
-//    var blackjack: Bool
-//    
+
+
     
     init() {
         self.dealer = Dealer()
@@ -30,8 +28,6 @@ class BlackjackGame {
     }
     
     func dealNewRound() {
-        self.player.checkStatus()
-        self.house.checkStatus()
         self.reset()
         var i = 0
         while i < 2 {
@@ -54,11 +50,11 @@ class BlackjackGame {
         self.player.handscore += dealtCard.cardValue!
         self.player.checkStatus()
         self.house.checkStatus()
-//        if self.player.handscore > 21 {
-//            self.player.busted = true
-//        } else if self.player.handscore == 21 {
-//            self.player.blackjack = true 
-//        }
+        if self.player.handscore > 21 {
+            self.player.busted = true
+       } else if self.player.handscore == 21 {
+           self.player.blackjack = true
+        }
     }
     
     
@@ -77,9 +73,11 @@ class BlackjackGame {
         while self.house.shouldHit() == true {
             let newHouseCard = dealer.dealCard()
             self.house.acceptCard(newHouseCard)
-            if let newScore = newHouseCard.cardValue {
-                self.house.handscore += newScore
-            }
+            self.house.handscore += newHouseCard.cardValue!
+            self.house.checkStatus()
+//            if let newScore = newHouseCard.cardValue {
+//                self.house.handscore += newScore
+//            }
         }
     }
 
