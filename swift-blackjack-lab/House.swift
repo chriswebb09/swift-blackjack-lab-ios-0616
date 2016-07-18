@@ -19,7 +19,11 @@ class House: Player {
     
     func mustHit() -> Bool
     {
-        return true 
+        if self.handscore <= 17 {
+            return true
+        }
+        return false 
+        
     }
     
 }
