@@ -15,41 +15,49 @@ class Dealer {
     var player: Player
     
     
-    init() {
+    init()
+    {
         self.deck = Deck()
         self.player = Player()
         self.house = House()
         self.bet = 0
     }
     
-    func deal() -> Card {
+    func deal() -> Card
+    {
         return self.deck.drawCard()
     }
     
     
-    func dealCard() -> Card {
+    func dealCard() -> Card
+    {
         let newCard = self.deck.drawCard()
         return newCard
     }
     
-    func shuffleDeck() {
+    func shuffleDeck()
+    {
         self.deck.shuffle()
     }
     
-    func placeBet(bet: UInt) -> Bool {
+    func placeBet(bet: UInt) -> Bool
+    {
         return false 
         
     }
     
-    func award() -> String {
+    func award() -> String
+    {
         return "Player Wins"
     }
     
-    func turn(player: Player) {
+    func turn(player: Player)
+    {
         
     }
     
-    func winner() -> String {
+    func winner() -> String
+    {
         return "No"
     }
     

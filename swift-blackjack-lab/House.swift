@@ -11,12 +11,14 @@ import Foundation
 
 class House: Player {
     
-    override init(name: String) {
+    override init(name: String)
+    {
         super.init(name: name)
         self.tokens = 1000
     }
     
-    func mustHit() -> Bool {
+    func mustHit() -> Bool
+    {
         return true 
     }
     
