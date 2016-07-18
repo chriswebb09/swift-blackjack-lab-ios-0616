@@ -6,20 +6,22 @@
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
-//import Foundation
-//
-//
-//class House: Player {
-////    var wallet: UInt
-////    var mustHit: Bool
-//    
-//    override init(name: String) {
-//        super.init(name: name)
-////        self.wallet = 100
-////        self.mustHit = true
-//    }
-//    
-//    func mustHit() {
-//    }
-//    
-//}
+import Foundation
+
+
+class House: Player {
+//    var wallet: UInt
+//    var mustHit: Bool
+    
+    override init(name: String) {
+        super.init(name: name)
+        self.tokens = 1000
+//        self.wallet = 100
+//        self.mustHit = true
+    }
+    
+    func mustHit() -> Bool {
+        return true 
+    }
+    
+}

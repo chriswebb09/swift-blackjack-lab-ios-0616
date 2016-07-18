@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stay: UIButton!
     
     
+    @IBOutlet weak var playerTokens: UILabel!
     @IBOutlet weak var player: UILabel!
     @IBOutlet weak var playerScore: UILabel!
     @IBOutlet weak var playerWins: UILabel!
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerStayed: UILabel!
     
     
+    @IBOutlet weak var houseTokens: UILabel!
     @IBOutlet weak var house: UILabel!
     @IBOutlet weak var houseStayed: UILabel!
     @IBOutlet weak var houseScore: UILabel!
@@ -141,6 +143,8 @@ class ViewController: UIViewController {
         self.houseWins.text = "Wins: \(String(self.game.house.wins))"
         self.playerLosses.text = "Losses: \(String(self.game.player.losses))"
         self.houseLosses.text = "Losses: \(String(self.game.house.losses))"
+        self.houseTokens.text = "Tokens: \(self.game.house.tokens)"
+        self.playerTokens.text = "Tokens: \(self.game.player.tokens)"
     }
     
     func updateViews() {
@@ -175,7 +179,7 @@ class ViewController: UIViewController {
             self.winner.hidden = false
             self.gameWon()
             //self.dealNewRound()
-            print("New game started, player got blackjack")
+//            print("New game started, player got blackjack")
         }
         if game.player.busted {
             self.playerBusted.hidden = false

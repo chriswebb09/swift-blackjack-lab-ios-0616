@@ -24,7 +24,7 @@ class Card {
         }
     }
     var description: String {
-        return "Card: \(self.cardLabel) Value: \(self.cardValue)"
+        return "\(self.cardLabel)"
     }
     
     init(suit: String, rank: String) {

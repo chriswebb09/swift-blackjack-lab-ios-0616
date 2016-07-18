@@ -68,13 +68,13 @@ class BlackjackGame {
     func houseTurn() {
         while self.house.shouldHit() {
             let newHouseCard = dealer.dealCard()
-            print("House turn house cards: \(self.house.cards)")
+//            print("House turn house cards: \(self.house.cards)")
             self.house.acceptCard(newHouseCard)
             self.house.getScore()
         }
         
         if !self.house.shouldHit() {
-            print("House stayed: \(self.house.cards)")
+//            print("House stayed: \(self.house.cards)")
             self.house.stayed = true
             self.house.getScore()
             self.endRound()
