@@ -60,7 +60,8 @@ class ViewController: UIViewController {
     }
     
     
-    func cardUI() {
+    func cardUI()
+    {
         for card in self.houseCardViews {
             card.layer.backgroundColor = UIColor.whiteColor().CGColor
         }
@@ -71,7 +72,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func dealNewRound() {
+    func dealNewRound()
+    {
         self.game.reset()
         self.newGame()
         self.updateViews()
@@ -79,7 +81,8 @@ class ViewController: UIViewController {
         self.stay.enabled = false
     }
     
-    func gameWon() {
+    func gameWon()
+    {
         let winner = self.game.winner()
         self.winner.text = ("\(winner) Won")
         self.hit.enabled = false
@@ -88,7 +91,8 @@ class ViewController: UIViewController {
     }
     
     
-    func newGame() {
+    func newGame()
+    {
         self.houseCard1.hidden = true
         self.houseCard2.hidden = true
         self.houseCard3.hidden = true
@@ -111,11 +115,13 @@ class ViewController: UIViewController {
         self.stay.enabled = false
     }
     
-    func showPlayerCards() {
+    func showPlayerCards()
+    {
         self.houseCard1.hidden = false
         self.houseCard2.hidden = false
         var i = 0
-        while i < self.game.player.cards.count && i <= 5 {
+        while i < self.game.player.cards.count && i <= 5
+        {
             self.playerCardViews[i].hidden = false
             self.playerCardViews[i].text = self.game.player.cards[i].cardLabel
             i += 1
@@ -123,9 +129,11 @@ class ViewController: UIViewController {
         
     }
     
-    func showHouseCards() {
+    func showHouseCards()
+    {
         var i = 0
-        while i < self.game.house.cards.count && i <= 5 {
+        while i < self.game.house.cards.count && i <= 5
+        {
             self.cardUI()
             self.houseCardViews[i].hidden = false
             self.houseCardViews[i].text = self.game.house.cards[i].cardLabel
@@ -136,7 +144,8 @@ class ViewController: UIViewController {
         
     }
     
-    func updateScore() {
+    func updateScore()
+    {
         self.houseScore.text = "Score: \(String(self.game.house.handscore))"
         self.playerScore.text = "Score: \(String(self.game.player.handscore))"
         self.playerWins.text  = "Wins: \(String(self.game.player.wins))"
@@ -147,14 +156,16 @@ class ViewController: UIViewController {
         self.playerTokens.text = "Tokens: \(self.game.player.tokens)"
     }
     
-    func updateViews() {
+    func updateViews()
+    {
         self.getActiveLabels()
         self.showPlayerCards()
         self.updateScore()
     }
     
     
-    @IBAction func stayButtonTapped(sender: AnyObject) {
+    @IBAction func stayButtonTapped(sender: AnyObject)
+    {
         self.houseCard1.text = self.game.house.cards[0].cardLabel
         self.houseCard2.text = self.game.house.cards[1].cardLabel
         self.deal.enabled = true
@@ -171,15 +182,18 @@ class ViewController: UIViewController {
         self.updateViews()
     }
     
-    @IBAction func hitTapped(sender: AnyObject) {
+    @IBAction func hitTapped(sender: AnyObject)
+    {
         self.game.hit()
-        if game.player.blackjack {
+        if game.player.blackjack
+        {
             self.playerBlackjack.hidden = false
             self.playerBusted.hidden = true
             self.winner.hidden = false
             self.gameWon()
         }
-        if game.player.busted {
+        if game.player.busted
+        {
             self.playerBusted.hidden = false
             self.winner.hidden = false
             self.winner.text = "HOUSE WINS"
@@ -189,7 +203,8 @@ class ViewController: UIViewController {
         self.houseScore.text = "Score: 0"
     }
     
-    @IBAction func dealTapped(sender: AnyObject) {
+    @IBAction func dealTapped(sender: AnyObject)
+    {
         self.dealNewRound()
         self.game.dealNewRound()
         self.deal.enabled = false
@@ -199,20 +214,29 @@ class ViewController: UIViewController {
         self.houseScore.text = "Score: 0"
     }
     
-    func houseTurn() {
+    func houseTurn()
+    {
         //        self.game.houseTurn()
         //        self.showHouseCards()
         //        self.game.reset()
     }
     
-    func getActiveLabels() {
-        if !self.game.player.busted {
+    func getActiveLabels()
+    {
+        if !self.game.player.busted
+        {
             self.playerBusted.hidden = true
-        } else if self.game.house.busted {
+        }
+        else if self.game.house.busted
+        {
             self.houseBusted.hidden = false
-        } else if !self.game.player.blackjack {
+        }
+        else if !self.game.player.blackjack
+        {
             self.playerBlackjack.hidden = true
-        } else if self.game.house.blackjack {
+        }
+        else if self.game.house.blackjack
+        {
             self.houseBlackjack.hidden = false
         }
     }

@@ -58,7 +58,8 @@ class Player {
     }
     var description: String
     
-    init(name: String) {
+    init(name: String)
+    {
         self.name = name
         self.cards = []
         self.tokens = 100
@@ -71,42 +72,53 @@ class Player {
         self.description = "\(self.name) Cards:\(self.cards) Tokens:\(self.tokens) Stayed: \(self.stayed)"
     }
     
-    convenience init() {
+    convenience init()
+    {
         self.init(name: "Player")
     }
     
-    func getScore() -> UInt {
+    func getScore() -> UInt
+    {
         var cardValue: UInt = 0
         for card in self.cards {
-            if card.cardLabel.containsString("A") && self.aceInHand {
+            if card.cardLabel.containsString("A") && self.aceInHand
+            {
                 cardValue += 11
-            } else {
+            }
+            else
+            {
                 cardValue += card.cardValue!
             }
         }
         return cardValue
     }
     
-    func resetForNewGame() {
+    func resetForNewGame()
+    {
         self.cards.removeAll()
         self.handscore
         self.stayed = false
     }
     
-    func checkPlayerStatus() {
+    func checkPlayerStatus()
+    {
         var cardString: String
-        if self.handscore > 21 {
+        if self.handscore > 21
+        {
             self.turn = false
-            for card in cards {
+            for card in cards
+            {
                 cardString = card.cardLabel
                 self.description.stringByAppendingString("Card String Description \(cardString)")
             }
         }
-        if self.handscore == 21 {
+        if self.handscore == 21
+        {
             self.turn = false
             self.blackjack
         }
-        if self.handscore < 21 {
+        if self.handscore < 21
+        {
             print("\(name) \(cards)")
             print("Less than 21: \(name)")
             print("go")
@@ -114,42 +126,53 @@ class Player {
         
     }
     
-    func checkForAce() -> Bool {
-        for card in self.cards {
-            if card.cardLabel.containsString("A") {
+    func checkForAce() -> Bool
+    {
+        for card in self.cards
+        {
+            if card.cardLabel.containsString("A")
+            {
                 self.numberOfAces += 1
             }
             
         }
-        if self.numberOfAces > 0 {
+        if self.numberOfAces > 0
+        {
             return true
         }
         return false
     }
         
-    func acceptCard(card: Card) {
+    func acceptCard(card: Card)
+    {
         self.cards.append(card)
     }
     
-    func canPlaceBet(bet:UInt) -> Bool {
-        if bet <= self.tokens {
+    func canPlaceBet(bet:UInt) -> Bool
+    {
+        if bet <= self.tokens
+        {
             return true 
         }
         return false
     }
     
-    func shouldHit() -> Bool {
-        if self.handscore <= 16 {
+    func shouldHit() -> Bool
+    {
+        if self.handscore <= 16
+        {
             return true
         }
         return false 
     }
     
-    func didWin(bet:UInt) {
+    func didWin(bet:UInt)
+    {
         self.tokens += bet
     }
     
-    func didLose(bet:UInt) {
+    func didLose(bet:UInt)
+    {
         self.tokens -= bet
     }
 }

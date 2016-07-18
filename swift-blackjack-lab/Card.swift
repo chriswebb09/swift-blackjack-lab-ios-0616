@@ -15,46 +15,59 @@ class Card {
         return "\(suit)\(rank)"
     }
     var cardValue: UInt? {
-        get {
+        get
+        {
             return getRankValue()
         }
         
-        set(newRank) {
+        set(newRank)
+        {
             self.rank = String(newRank)
         }
     }
+    
     var description: String {
         return "\(self.cardLabel)"
     }
     
-    init(suit: String, rank: String) {
+    init(suit: String, rank: String)
+    {
         self.suit = suit
         self.rank = rank
     }
     
-    convenience init () {
+    convenience init ()
+    {
         self.init(suit:"!", rank:"N")
     }
     
-    func validSuits() -> [String] {
+    func validSuits() -> [String]
+    {
         let suitsArray: [String] = ["♥", "♣", "♦", "♠"]
         return suitsArray
     }
     
-    func validRanks() -> [String] {
+    func validRanks() -> [String]
+    {
         let ranksArray: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "J", "Q", "K", "A"]
         return ranksArray
     }
     
     
-    func getRankValue() -> UInt {
+    func getRankValue() -> UInt
+    {
         var returnRank: UInt = 0
         let numRanks = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        if self.rank == "Q" || rank == "J" || rank == "K" {
+        if self.rank == "Q" || rank == "J" || rank == "K"
+        {
             returnRank = 10
-        } else if self.rank == "A" {
+        }
+        else if self.rank == "A"
+        {
             returnRank == 11
-        } else if numRanks.contains(self.rank) {
+        }
+        else if numRanks.contains(self.rank)
+        {
             returnRank = UInt(self.rank)!
         }
         return returnRank

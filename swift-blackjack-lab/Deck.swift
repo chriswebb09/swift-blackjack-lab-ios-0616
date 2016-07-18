@@ -14,20 +14,26 @@ class Deck {
     var cardLabel: String {
         return Card().cardLabel
     }
+    
     var description: String
     
-    init() {
+    init()
+    {
         self.dealtCards = []
         self.remainingCards = Deck.generateDeck()
         self.description = "Dealt Cards: \(self.dealtCards.count) Remaining Cards: \(self.remainingCards.count)"
     }
     
-    func drawCard() -> Card {
-        if self.remainingCards.count > 0 {
+    func drawCard() -> Card
+    {
+        if self.remainingCards.count > 0
+        {
             let returnCard: Card = self.remainingCards.popLast()!
             self.dealtCards.append(returnCard)
             return returnCard
-        } else {
+        }
+        else
+        {
             self.gatherDealtCards()
             let returnCard: Card = self.remainingCards.popLast()!
             self.dealtCards.append(returnCard)
@@ -37,10 +43,12 @@ class Deck {
     }
     
     
-    func shuffle() {
+    func shuffle()
+    {
         var shuffledDeck: [Card] = self.remainingCards
         var newDeck: [Card] = []
-        while shuffledDeck.count > 0 {
+        while shuffledDeck.count > 0
+        {
             let i = arc4random_uniform(UInt32(shuffledDeck.count))
             let randomCard: Card = shuffledDeck[Int(i)]
             newDeck.append(randomCard)
@@ -50,10 +58,13 @@ class Deck {
         self.remainingCards = newDeck
     }
     
-    private class func generateDeck() -> [Card] {
+    private class func generateDeck() -> [Card]
+    {
         var cardDeck: [Card] = []
-        for suit in Card().validSuits() {
-            for rank in Card().validRanks() {
+        for suit in Card().validSuits()
+        {
+            for rank in Card().validRanks()
+            {
                 cardDeck.append(Card(suit: suit, rank: rank))
             }
         }
@@ -61,7 +72,8 @@ class Deck {
     }
     
     
-    func gatherDealtCards() {
+    func gatherDealtCards()
+    {
         self.remainingCards.appendContentsOf(self.dealtCards)
         self.dealtCards.removeAll()
     }
