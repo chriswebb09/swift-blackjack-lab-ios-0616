@@ -19,7 +19,6 @@ class Deck {
     init() {
         self.dealtCards = []
         self.remainingCards = Deck.generateDeck()
-        //self.cardLabel = Card().cardLabel
         self.description = "Dealt Cards: \(self.dealtCards.count) Remaining Cards: \(self.remainingCards.count)"
     }
     
@@ -64,7 +63,6 @@ class Deck {
     
     func gatherDealtCards() {
         self.remainingCards.appendContentsOf(self.dealtCards)
-//        print("Gather dealt cards: \(self.remainingCards)")
         self.dealtCards.removeAll()
     }
 }

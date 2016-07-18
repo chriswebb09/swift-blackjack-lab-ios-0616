@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     
     
     var houseCardViews: [UILabel]!
-    var playerCardViews: [UILabel]!
+    var  playerCardViews: [UILabel]!
     var game: BlackjackGame!
     override func viewDidLoad() {
         
@@ -178,15 +178,12 @@ class ViewController: UIViewController {
             self.playerBusted.hidden = true
             self.winner.hidden = false
             self.gameWon()
-            //self.dealNewRound()
-//            print("New game started, player got blackjack")
         }
         if game.player.busted {
             self.playerBusted.hidden = false
             self.winner.hidden = false
             self.winner.text = "HOUSE WINS"
             self.gameWon()
-            //self.dealNewRound()
         }
         self.updateViews()
         self.houseScore.text = "Score: 0"
@@ -194,8 +191,6 @@ class ViewController: UIViewController {
     
     @IBAction func dealTapped(sender: AnyObject) {
         self.dealNewRound()
-        
-        //self.houseScore.hidden = true
         self.game.dealNewRound()
         self.deal.enabled = false
         self.hit.enabled = true

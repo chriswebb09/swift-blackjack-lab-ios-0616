@@ -14,16 +14,13 @@ class Player {
     var aceInHand: Bool {
         return checkForAce()
     }
-//    var didWin: Bool {
-//        return self.tokens - self.bet
-//    }
+    
     var mustHit: Bool {
         if self.handscore <= 16 {
             return true
         }
         return false
     }
-//    var bet: UInt
     var tokens: UInt
     var wins: UInt
     var numberOfAces: UInt
@@ -64,7 +61,6 @@ class Player {
     init(name: String) {
         self.name = name
         self.cards = []
-        //self.aceInHand = false
         self.tokens = 100
         self.wins = 0
         self.losses = 0
@@ -101,25 +97,14 @@ class Player {
         var cardString: String
         if self.handscore > 21 {
             self.turn = false
-//            print("\(name) Turn ")
-//            print("busted")
-//            print("\(name) \(name)")
-//            print("BUSTED \(cards)")
             for card in cards {
                 cardString = card.cardLabel
                 self.description.stringByAppendingString("Card String Description \(cardString)")
-//                print("\(cardString)")
-//                print("\(card.cardLabel)")
-//                print(description)
             }
         }
         if self.handscore == 21 {
-//            print("blackjack")
             self.turn = false
             self.blackjack
-//            print("\(name) Turn ")
-//            print("\(name) \(cards)")
-//            print("Blackjack \(name)")
         }
         if self.handscore < 21 {
             print("\(name) \(cards)")
@@ -167,12 +152,4 @@ class Player {
     func didLose(bet:UInt) {
         self.tokens -= bet
     }
-    
-//    func shouldHit() -> Bool {
-//        if self.handscore >= 16 {
-//            self.stayed = true
-//            return false
-//        }
-//        return true 
-//    }
 }

@@ -13,7 +13,6 @@ class Dealer {
     var bet: UInt
     var house: House
     var player: Player
-    //var description: String
     
     
     init() {

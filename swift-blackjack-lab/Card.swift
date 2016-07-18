@@ -30,9 +30,6 @@ class Card {
     init(suit: String, rank: String) {
         self.suit = suit
         self.rank = rank
-        //        self.cardLabel = "\(suit)\(rank)"
-        //        self.cardValue = UInt(rank)
-        //self.description =
     }
     
     convenience init () {
