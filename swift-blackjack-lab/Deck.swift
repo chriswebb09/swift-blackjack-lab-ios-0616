@@ -11,38 +11,45 @@ class Deck {
     
     private var remainingCards: [Card]
     private var dealtCards: [Card]
-    var cardLabel: String
+    var cardLabel: String {
+        return Card().cardLabel
+    }
     var description: String
     
     init() {
         self.dealtCards = []
         self.remainingCards = Deck.generateDeck()
-        self.cardLabel = Card().cardLabel
+        //self.cardLabel = Card().cardLabel
         self.description = Card().description
     }
     
     func drawCard() -> Card {
-        let returnCard: Card = self.remainingCards.popLast()!
-        dealtCards.append(returnCard)
-        return returnCard
+        if self.remainingCards.count > 0 {
+            let returnCard: Card = self.remainingCards.popLast()!
+            self.dealtCards.append(returnCard)
+            return returnCard
+        } else {
+            self.gatherDealtCards()
+            let returnCard: Card = self.remainingCards.popLast()!
+            self.dealtCards.append(returnCard)
+            return returnCard
+        }
+        
     }
     
     
-//    func shuffle() {
-//        
-//        var shuffledDeck = []
-//        
-//        while self.remainingCards.count > 0 {
-//            var index = arc4random_uniform(UInt32(self.remainingCards.count))
-//            var newCard = self.remainingCards.removeAtIndex(Int(index))
-//            shuffledDeck.arrayByAddingObject(newCard)
-//        }
-//        
-//        self.remainingCards.removeAll()
-//        //self.remainingCards.appendContents(shuffledDeck)
-//        
-//        
-//    }
+    func shuffle() {
+        var shuffledDeck: [Card] = self.remainingCards
+        var newDeck: [Card] = []
+        while shuffledDeck.count > 0 {
+            let i = arc4random_uniform(UInt32(shuffledDeck.count))
+            let randomCard: Card = shuffledDeck[Int(i)]
+            newDeck.append(randomCard)
+            shuffledDeck.removeAtIndex(Int(i))
+            
+        }
+        self.remainingCards = newDeck
+    }
     
     private class func generateDeck() -> [Card] {
         var cardDeck: [Card] = []
@@ -57,6 +64,7 @@ class Deck {
     
     func gatherDealtCards() {
         self.remainingCards.appendContentsOf(self.dealtCards)
+        print("Gather dealt cards: \(self.remainingCards)")
         self.dealtCards.removeAll()
     }
 }

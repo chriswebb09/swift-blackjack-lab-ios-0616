@@ -10,36 +10,24 @@ import Foundation
 
 
 class BlackjackGame {
-    
     var player: Player
     var dealer: Dealer
     var house: Player
-
-
     
     init() {
         self.dealer = Dealer()
         self.player = Player()
         self.house = Player()
-        self.player.busted = false
-        self.house.busted = false
-        self.house.blackjack = false
-        self.player.blackjack = false 
     }
     
+    
     func dealNewRound() {
-        self.reset()
+        self.dealer.shuffleDeck()
+        self.newRound()
         var i = 0
         while i < 2 {
             self.player.acceptCard(dealer.dealCard())
             self.house.acceptCard(dealer.dealCard())
-            if let newValue = self.player.cards[i].cardValue {
-                self.player.handscore += newValue
-            }
-            
-            if let newHouseValue = self.house.cards[i].cardValue {
-                self.house.handscore += newHouseValue
-            }
             i += 1
         }
     }
@@ -47,71 +35,125 @@ class BlackjackGame {
     func hit() {
         let dealtCard = dealer.dealCard()
         self.player.acceptCard(dealtCard)
-        self.player.handscore += dealtCard.cardValue!
-        self.player.checkStatus()
-        self.house.checkStatus()
-        if self.player.handscore > 21 {
-            self.player.busted = true
-       } else if self.player.handscore == 21 {
-           self.player.blackjack = true
-        }
     }
-    
-    
-    func stayed() -> Bool {
-        return true 
-    }
-    
     
     func reset() {
         self.player.resetForNewGame()
         self.house.resetForNewGame()
+        //        self.dealer.deck.gatherDealtCards()
+        //        self.dealer.deck.shuffle()
     }
-
+    
+    func stayed() -> Bool {
+        if self.player.turn {
+            self.player.stayed = true
+        } else if self.house.turn {
+            self.house.stayed = true
+        }
+        return true
+    }
+    
+    
+    //    func reset() {
+    //        self.player.resetForNewGame()
+    //        self.house.resetForNewGame()
+    //    }
+    
+    func newRound() {
+        self.reset()
+        self.dealer.shuffleDeck()
+    }
+    
     
     func houseTurn() {
-        while self.house.shouldHit() == true {
+        while self.house.shouldHit() {
             let newHouseCard = dealer.dealCard()
+            print("House turn house cards: \(self.house.cards)")
             self.house.acceptCard(newHouseCard)
-            self.house.handscore += newHouseCard.cardValue!
-            self.house.checkStatus()
-//            if let newScore = newHouseCard.cardValue {
-//                self.house.handscore += newScore
-//            }
+            self.house.getScore()
+        }
+        
+        if !self.house.shouldHit() {
+            print("House stayed: \(self.house.cards)")
+            self.house.stayed = true
+            self.house.getScore()
+            self.endRound()
         }
     }
-
+    
+    func endRound() {
+        if self.player.stayed && self.house.stayed {
+            self.winner()
+            self.player.stayed = true
+            self.house.stayed = true
+            self.house.getScore()
+            self.reset()
+        }
+    }
     
     
+    func winner() -> String {
+        if self.player.handscore > self.house.handscore && !self.player.busted {
+            self.player.won = true
+            self.house.won = false
+            self.house.getScore()
+            print("Player Won House Handscore \(self.house.handscore)")
+            self.player.wins += 1
+            self.house.losses += 1
+            return "Player"
+        } else if self.player.busted {
+            self.player.won = false
+            self.house.won = true
+            self.house.wins += 1
+            self.player.losses += 1
+            self.house.getScore()
+            return "House"
+        } else if self.house.busted {
+            self.house.won = false
+            self.player.won = true
+            self.house.wins += 1
+            self.player.losses += 1
+            self.house.getScore()
+            return "Player"
+        } else if self.house.handscore > self.player.handscore && !self.house.busted {
+            self.player.won = false
+            self.house.won = true
+            self.house.wins += 1
+            print("\(self.house.wins)")
+            self.player.losses += 1
+            self.house.getScore()
+            print("House Not Busted Player lost House Handscore \(self.house.handscore)")
+            return "House"
+        }  else if self.house.blackjack {
+            self.house.won = true
+            self.player.won = false
+            self.house.wins += 1
+            self.player.losses += 1
+            self.house.getScore()
+            print("House won House Handscore \(self.house.handscore)")
+            return "House"
+        } else if self.player.handscore > self.house.handscore {
+            self.house.won = false
+            self.player.won = true
+            self.house.wins += 1
+            self.player.losses += 1
+            self.house.getScore()
+            return "Player"
+        } else if !self.player.busted && self.player.handscore < self.house.handscore && !self.house.busted {
+            self.house.won = true
+            self.player.won = false
+            self.house.wins += 1
+            self.player.losses += 1
+            self.house.getScore()
+            print("House Won Handscore \(self.house.handscore)")
+            return "House"
+        } else {
+            self.player.won = false
+            self.house.won = false
+            self.house.getScore()
+            print("Handscore \(self.house.handscore)")
+            return "No"
+        }
+    }
     
-//    func dealCard() -> Card {
-//        let newCard = self.dealer.dealCard()
-//        return newCard
-//    }
-    
-    
-    
-//    func dealNewRound() {
-//        var i = 0
-//        while i < 2 {
-//            self.dealer.dealCardToPlayer()
-//            self.dealer.dealCardToHouse()
-//            i += 1
-//        }
-//       
-//        
-//        self.dealer.dealRound(//)
-    
-//    func dealCardToPlayer() {
-//        
-//    }
-//    
-//    func dealCardToHouse() {
-//        
-//        
-//    }
-    
-//    func houseWins() -> Bool {
-//        return false 
-//    }
 }

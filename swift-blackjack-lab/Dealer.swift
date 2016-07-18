@@ -16,9 +16,14 @@ class Dealer {
         self.deck = Deck()
     }
     
+    
     func dealCard() -> Card {
         let newCard = self.deck.drawCard()
         return newCard
+    }
+    
+    func shuffleDeck() {
+        self.deck.shuffle()
     }
     
 }
