@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var hit: UIButton!
     @IBOutlet weak var stay: UIButton!
     
+    @IBOutlet weak var bet: UIButton!
     
     @IBOutlet weak var playerTokens: UILabel!
     @IBOutlet weak var player: UILabel!
@@ -219,6 +220,21 @@ class ViewController: UIViewController {
         //        self.game.houseTurn()
         //        self.showHouseCards()
         //        self.game.reset()
+    }
+    @IBAction func betTapped(sender: AnyObject) {
+        let alert = UIAlertController(title: "Wager", message: "Place your bet: ", preferredStyle: .Alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+            textField.text = "0"
+        })
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            let textField = alert.textFields![0] as UITextField
+            print("Text field: \(textField.text)")
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
     
     func getActiveLabels()

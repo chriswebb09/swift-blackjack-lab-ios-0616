@@ -28,6 +28,9 @@ class Player {
     var turn: Bool
     var won: Bool
     var handscore: UInt {
+        if self.cards.count == 0 {
+            return 0
+        }
         let score = getScore()
         self.description = self.description + "Handscore: \(score)"
         return score
